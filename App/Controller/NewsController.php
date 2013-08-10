@@ -6,6 +6,7 @@
 
 namespace App\Controller;
 
+use App\App;
 use App\Model\NewsModel;
 
 use Joomla\Application\AbstractApplication;
@@ -100,7 +101,10 @@ class NewsController extends DefaultController
 			$model = new NewsModel;
 			$model->save($src);
 
-			$app    = $this->getApplication();
+			/* @type App $app */
+			$app = $this->getApplication();
+			$app->enqueueMessage('Item successfully saved!', 'success');
+
 			$filter = new InputFilter;
 			$app->redirect($app->get('uri.base.path') . 'news/view/' . $filter->clean($src['news_id'], 'uint'));
 		}
