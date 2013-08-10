@@ -11,6 +11,9 @@ use Joomla\Controller\ControllerInterface;
 use Joomla\Database\DatabaseDriver;
 use Joomla\Event\Dispatcher;
 use Joomla\Factory;
+use Joomla\Github\Github;
+use Joomla\Github\Http;
+use Joomla\Http\HttpFactory;
 use Joomla\Language\Language;
 use Joomla\Registry\Registry;
 
@@ -73,6 +76,14 @@ final class App extends AbstractWebApplication
 	 * @since  1.0
 	 */
 	private $language;
+
+	/**
+	 * The GitHub object
+	 *
+	 * @var    Github
+	 * @since  1.0
+	 */
+	private $github;
 
 	/**
 	 * Class constructor.
@@ -191,6 +202,44 @@ final class App extends AbstractWebApplication
 		$this->getSession()->getFlashBag()->add($type, $msg);
 
 		return $this;
+	}
+
+	/**
+	 * Get a GitHub object.
+	 *
+	 * @return  Github
+	 *
+	 * @since   1.0
+	 * @throws  \RuntimeException
+	 */
+	public function getGitHub()
+	{
+		if (!$this->github)
+		{
+			$options = new Registry;
+
+			$token = $this->getSession()->get('gh_oauth_access_token');
+
+			if ($token)
+			{
+				$options->set('gh.token', $token);
+			}
+			else
+			{
+				$options->set('api.username', $this->get('github.username'));
+				$options->set('api.password', $this->get('github.password'));
+			}
+
+			// GitHub API works best with cURL
+			$transport = HttpFactory::getAvailableDriver($options, array('curl'));
+
+			$http = new Http($options, $transport);
+
+			// Instantiate Github
+			$this->github = new Github($options, $http);
+		}
+
+		return $this->github;
 	}
 
 	/**

@@ -58,7 +58,7 @@ class DefaultController extends AbstractController
 		// Get the input
 		$input = $this->getInput();
 
-		$task = $input->get('task','view');
+		$task = $input->get('task', 'view');
 
 		// Get some data from the request
 		$vName   = $input->getWord('view', $this->defaultView);

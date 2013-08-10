@@ -4,8 +4,53 @@
 
 {% block subtitle %}<h1 class="page-header">Add/Edit Article</h1>{% endblock %}
 
+{% block headerCSS %}
+    {{ parent() }}
+    <link href="{{ uri.base.path }}assets/markitup/skins/markitup/style.css" rel="stylesheet"/>
+    <link href="{{ uri.base.path }}assets/markitup/sets/markdown/style.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block JavaScriptBottom %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ uri.base.path }}assets/markitup/jquery.markitup.js"></script>
+    <script type="text/javascript" src="{{ uri.base.path }}assets/markitup/sets/markdown/set.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#description').markItUp(myMarkdownSettings);
+        });
+
+        $('a[data-toggle="tab"]').on('shown', function(e) {
+            if ('#preview' == $(e.target).attr('href')) {
+                JFWAwesome.preview('#description', '#preview', '{{ uri.base.path }}');
+            }
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
-    <form>
-        <input type="text" name="title" value="{{ item.title }}"/>
+    <form method="post" action="{{ uri.base.path }}news/save" class="form-inline" name="editForm">
+        <div class="row-fluid">
+            <div class="span12 well-small">
+                <ul class="unstyled">
+                    <li>
+                        <input type="text" name="item[title]" style="width: 80%; font-size: 1.3em;" value="{{ item.title }}"/>
+                    </li>
+                    <li>
+                        {% set editorId="description" %}
+                        {% set editorName="item[raw_body]" %}
+                        {% set editorText=item.raw_body %}
+                        {% set editorPlaceholder="Description text" %}
+
+                        {% include "editor.twig" %}
+                    </li>
+                </ul>
+            </div>
+
+            <input type="hidden" name="item[news_id]" value="{{ item.news_id }}">
+            <a class="btn btn-success" href="javascript:" onclick="document.editForm.submit();">Save</a>
+            <a class="btn btn-inverse" href="{{ uri.base.path }}news/view/{{ item.id }}">Cancel</a>
+        </div>
     </form>
 {% endblock %}

@@ -23,12 +23,6 @@ class InstallScript
 			copy('App/Config/config.dist.json', 'App/Config/config.json');
 		}
 
-		// Make sure the assets directory exists
-		if (!is_dir('www/assets'))
-		{
-			mkdir('www/assets', 0755);
-		}
-
 		$bsImagePath = '../../vendor/twbs/bootstrap/docs/assets/img';
 		$imgAssetsPath = 'www/assets/img';
 		symlink($bsImagePath,$imgAssetsPath);

@@ -61,4 +61,39 @@ class NewsModel extends DefaultModel
 
 		return $data;
 	}
+
+	/**
+	 * Save the item.
+	 *
+	 * @param   array  $src  The source.
+	 *
+	 * @return  $this
+	 *
+	 * @since   1.0
+	 * @throws  \RuntimeException
+	 */
+	public function save(array $src)
+	{
+		$filter = new InputFilter;
+
+		$data = array();
+
+		$data['news_id'] = $filter->clean($src['news_id'], 'uint');
+
+		if (!$data['news_id'])
+		{
+			throw new \RuntimeException('Missing ID');
+		}
+
+		$data['title']          = $filter->clean($src['title'], 'string');
+		$data['raw_body']       = $filter->clean($src['raw_body'], 'string');
+		$data['formatted_body'] = Factory::$application->getGithub()->markdown->render($data['raw_body'], 'markdown');
+
+		$table = new NewsTable($this->db);
+
+		$table->load($data['id'])
+			->save($data);
+
+		return $this;
+	}
 }

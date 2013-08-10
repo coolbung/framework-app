@@ -15,10 +15,11 @@ use App\Table\DefaultDatabaseTable;
 /**
  * Table interface class for the #__news table
  *
- * @property   integer  $news_id  PK
- * @property   string   $title    News title
- * @property   string   $alias    News title alias
- * @property   string   $body     News Body
+ * @property   integer  $news_id         PK
+ * @property   string   $title           News title
+ * @property   string   $alias           News title alias
+ * @property   string   $formatted_body  Body content formatted via Markdown
+ * @property   string   $raw_body        Raw body content
  *
  * @since  1.0
  */

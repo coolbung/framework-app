@@ -6,6 +6,6 @@
 
 {% block content %}
     <em>Article ID# {{ item.news_id }}</em>
-    <p>{{ item.body }}</p>
+    <p>{{ item.formatted_body|raw }}</p>
 {% endblock %}
 

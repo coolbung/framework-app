@@ -6,6 +6,7 @@
         <link href="{{ uri.base.path }}assets/css/bootstrap.css" rel="stylesheet"/>
         <link href="{{ uri.base.path }}assets/css/bootstrap-responsive.css" rel="stylesheet"/>
         <link href="{{ themePath }}css/theme.css" rel="stylesheet"/>
+        {% block headerCSS %}{% endblock %}
     </head>
     <body>
 
@@ -39,7 +40,10 @@
 
         </div>
 
-        <script src="{{ uri.base.path }}assets/js/jquery.js"></script>
-        <script src="{{ uri.base.path }}assets/js/bootstrap.min.js"></script>
+        {% block JavaScriptBottom %}
+            <script src="{{ uri.base.path }}assets/js/jquery.js"></script>
+            <script src="{{ uri.base.path }}assets/js/bootstrap.min.js"></script>
+            <script src="{{ themePath }}js/jfw-awesome.js"></script>
+        {% endblock %}
     </body>
 </html>
