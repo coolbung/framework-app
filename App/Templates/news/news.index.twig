@@ -11,7 +11,7 @@
                 <div class="span4">
                     <h3>{{ item.title }}</h3>
 
-                    <p>{{ item.body }}</p>
+                    <p>{{ item.formatted_body|raw }}</p>
                 </div>
             {% endfor %}
         </div>
