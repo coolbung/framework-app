@@ -94,32 +94,26 @@ class NewsController extends DefaultController
 
 	public function save()
 	{
+		/* @type App $app */
+		$app = $this->getApplication();
+
 		$src = $this->getInput()->get('item', array(), 'array');
+
+		$filter = new InputFilter;
+		$id     = $filter->clean($src['news_id'], 'uint');
 
 		try
 		{
 			$model = new NewsModel;
 			$model->save($src);
 
-			/* @type App $app */
-			$app = $this->getApplication();
 			$app->enqueueMessage('Item successfully saved!', 'success');
-
-			$filter = new InputFilter;
-			$app->redirect($app->get('uri.base.path') . 'news/view/' . $filter->clean($src['news_id'], 'uint'));
+			$app->redirect($app->get('uri.base.path') . 'news/view/' . $id);
 		}
 		catch (\Exception $e)
 		{
-			echo $e->getMessage();
-
-			var_dump($e->getErrors());
-
-			exit(255);
-
-			// @todo move on to somewhere =;)
-
-			// $this->getInput()->set('view', 'issue');
-			// $this->getInput()->set('layout', 'edit');
+			$app->enqueueMessage('Save failed - ' . $e->getMessage(), 'error');
+			$app->redirect($app->get('uri.base.path') . 'news/view/' . $id);
 		}
 	}
 }
