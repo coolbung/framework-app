@@ -23,16 +23,31 @@ class InstallScript
 			copy('App/Config/config.dist.json', 'App/Config/config.json');
 		}
 
+		// Symlink img
 		$bsImagePath = '../../vendor/twbs/bootstrap/docs/assets/img';
 		$imgAssetsPath = 'www/assets/img';
-		symlink($bsImagePath,$imgAssetsPath);
 
+		if (!file_exists($imgAssetsPath))
+		{
+			symlink($bsImagePath, $imgAssetsPath);
+		}
+
+		// Symlink js
 		$bsJSPath = '../../vendor/twbs/bootstrap/docs/assets/js';
 		$jsAssetsPath = 'www/assets/js';
-		symlink($bsJSPath,$jsAssetsPath);
 
+		if (!file_exists($jsAssetsPath))
+		{
+			symlink($bsJSPath, $jsAssetsPath);
+		}
+
+		// Symlink css
 		$bsCSSPath = '../../vendor/twbs/bootstrap/docs/assets/css';
 		$cssAssetsPath = 'www/assets/css';
-		symlink($bsCSSPath,$cssAssetsPath);
+
+		if (!file_exists($cssAssetsPath))
+		{
+			symlink($bsCSSPath, $cssAssetsPath);
+		}
 	}
 }
