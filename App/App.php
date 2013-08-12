@@ -6,6 +6,10 @@
 
 namespace App;
 
+use App\Router\AppRouter;
+use App\Authentication\GitHub\GitHubUser;
+use App\Authentication\User;
+
 use Joomla\Application\AbstractWebApplication;
 use Joomla\Controller\ControllerInterface;
 use Joomla\Database\DatabaseDriver;
@@ -16,8 +20,6 @@ use Joomla\Github\Http;
 use Joomla\Http\HttpFactory;
 use Joomla\Language\Language;
 use Joomla\Registry\Registry;
-
-use App\Router\AppRouter;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -275,6 +277,57 @@ final class App extends AbstractWebApplication
 		}
 
 		return $this->newSession;
+	}
+
+	/**
+	 * Get a user object.
+	 *
+	 * @param   integer  $id  The user id or the current user.
+	 *
+	 * @return  User
+	 *
+	 * @since   1.0
+	 */
+	public function getUser($id = 0)
+	{
+		if ($id)
+		{
+			return new GitHubUser($id);
+		}
+
+		if (is_null($this->user))
+		{
+			$this->user = ($this->getSession()->get('user')) ? : new GitHubUser;
+		}
+
+		return $this->user;
+	}
+
+	/**
+	 * Login or logout a user.
+	 *
+	 * @param   User  $user  The user object.
+	 *
+	 * @return  $this  Method allows chaining
+	 *
+	 * @since   1.0
+	 */
+	public function setUser(User $user = null)
+	{
+		if (is_null($user))
+		{
+			// Logout
+			$this->user = new GitHubUser;
+		}
+		else
+		{
+			// Login
+			$this->user = $user;
+		}
+
+		$this->getSession()->set('user', $this->user);
+
+		return $this;
 	}
 
 	/**

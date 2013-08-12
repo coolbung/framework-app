@@ -43,6 +43,12 @@ class NewsController extends DefaultController
 
 	public function edit()
 	{
+		if (!$this->getApplication()->getUser()->id)
+		{
+			$this->getApplication()->enqueueMessage('Must login first', 'error');
+			$this->getApplication()->redirect($this->getApplication()->get('uri.base.path') . 'news');
+		}
+
 		$this->getInput()->set('layout', 'edit');
 	}
 
@@ -59,10 +65,10 @@ class NewsController extends DefaultController
 		try
 		{
 			// Only registered users are able to use the preview using their credentials.
-			/*if (!$this->getApplication()->getUser()->id)
+			if (!$this->getApplication()->getUser()->id)
 			{
 				throw new \Exception('not auth..');
-			}*/
+			}
 
 			$text = $this->getInput()->get('text', '', 'raw');
 
@@ -96,6 +102,12 @@ class NewsController extends DefaultController
 	{
 		/* @type App $app */
 		$app = $this->getApplication();
+
+		if (!$app->getUser()->id)
+		{
+			$app->enqueueMessage('Must login first', 'error');
+			$app->redirect($this->getApplication()->get('uri.base.path') . 'news');
+		}
 
 		$src = $this->getInput()->get('item', array(), 'array');
 

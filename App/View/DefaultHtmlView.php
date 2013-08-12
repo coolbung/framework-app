@@ -6,6 +6,7 @@
 
 namespace App\View;
 
+use App\Authentication\GitHub\GitHubLoginHelper;
 use App\View\Renderer\TwigExtension;
 
 use Joomla\Factory;
@@ -74,6 +75,13 @@ class DefaultHtmlView extends AbstractView
 		{
 			$this->renderer->setTemplatesPaths($templatesPaths, true);
 		}
+
+		$gitHubHelper = new GitHubLoginHelper($app->get('github.client_id'), $app->get('github.client_secret'));
+
+		// Register GitHub authentication data
+		$this->renderer
+			->set('loginUrl', $gitHubHelper->getLoginUri())
+			->set('user', $app->getUser());
 
 		// Register the theme path
 		$this->renderer->set('themePath', DEFAULT_THEME . '/');

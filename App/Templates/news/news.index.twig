@@ -9,7 +9,16 @@
         <div class="row-fluid">
             {% for item in items %}
                 <div class="span4">
-                    <h3>{{ item.title }}</h3>
+                    <h3>
+                        {{ item.title }}
+                        {% if user.id %}
+                            <span class="pull-right">
+                                <a class="btn btn-small" href="{{ uri.base.path }}news/edit/{{ item.news_id }}">
+                                    <span class="icon-edit"></span>
+                                </a>
+                            </span>
+                        {% endif %}
+                    </h3>
 
                     <p>{{ item.formatted_body|raw }}</p>
                 </div>

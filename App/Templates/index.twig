@@ -17,6 +17,11 @@
                     <li class="{{ "" == uri.route or "dashboard" == firstPart ? "active" : "" }}"><a href="{{ uri.base.path }}">Home</a></li>
                     <li class="{{ "news" == uri.route or "news" == firstPart ? "active" : "" }}"><a href="{{ uri.base.path }}news">Sample Page</a></li>
                     <li><a href="http://joomla.github.io/joomla-framework/">Docs</a></li>
+                    {% if user.id %}
+                    <li><a href="{{ uri.base.path }}user/logout">Logout</a></li>
+                    {% else %}
+                    <li><a href="{{ loginUrl }}">Login with GitHub</a></li>
+                    {% endif %}
                 </ul>
                 <h3 class="muted">Joomla! Framework</h3>
             </div>

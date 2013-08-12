@@ -8,8 +8,10 @@
 		"prefix"  : "app_"
 	},
 	"github"   : {
-		"username": "",
-		"password": ""
+		"username"     : "",
+		"password"     : "",
+		"client_id"    : "",
+		"client_secret": ""
 	},
 	"renderer" : {
 		"type": "twig"
