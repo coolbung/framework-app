@@ -70,6 +70,14 @@ final class App extends AbstractWebApplication
 	private $github;
 
 	/**
+	 * The GitHub object
+	 *
+	 * @var    User
+	 * @since  1.0
+	 */
+	private $user;
+
+	/**
 	 * Class constructor.
 	 *
 	 * @since   1.0
