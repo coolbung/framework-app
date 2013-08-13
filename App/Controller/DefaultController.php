@@ -6,10 +6,7 @@
 
 namespace App\Controller;
 
-use Joomla\Application\AbstractApplication;
 use Joomla\Controller\AbstractController;
-use Joomla\Input\Input;
-use Joomla\Log\Log;
 
 use App\View\DefaultHtmlView;
 

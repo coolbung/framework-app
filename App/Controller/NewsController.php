@@ -9,10 +9,7 @@ namespace App\Controller;
 use App\App;
 use App\Model\NewsModel;
 
-use Joomla\Application\AbstractApplication;
 use Joomla\Filter\InputFilter;
-use Joomla\Input\Input;
-use Joomla\Log\Log;
 
 /**
  * News Controller class for the Application
@@ -29,18 +26,13 @@ class NewsController extends DefaultController
 	 */
 	protected $defaultView = 'news';
 
-	public function __construct(Input $input = null, AbstractApplication $app = null)
-	{
-		parent::__construct($input, $app);
-
-		$this->defaultView = 'news';
-	}
-
-	public function add()
-	{
-		exit;
-	}
-
+	/**
+	 * Edit task for news items
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
 	public function edit()
 	{
 		if (!$this->getApplication()->getUser()->id)
@@ -52,6 +44,13 @@ class NewsController extends DefaultController
 		$this->getInput()->set('layout', 'edit');
 	}
 
+	/**
+	 * Preview input text in Markdown format
+	 *
+	 * @return  void  Calls exit()
+	 *
+	 * @since   1.0
+	 */
 	public function preview()
 	{
 		$response = new \stdClass;
@@ -98,6 +97,13 @@ class NewsController extends DefaultController
 		exit;
 	}
 
+	/**
+	 * Saves news items
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
 	public function save()
 	{
 		/* @type App $app */

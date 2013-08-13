@@ -6,9 +6,6 @@
 
 namespace App\Controller;
 
-use Joomla\Application\AbstractApplication;
-use Joomla\Input\Input;
-use Joomla\Log\Log;
 use App\Model\DashboardModel;
 
 /**

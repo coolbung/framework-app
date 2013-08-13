@@ -100,8 +100,7 @@ class NewsModel extends DefaultModel
 
 		$table = new NewsTable($this->db);
 
-		$table->load($data['id'])
-			->save($data);
+		$table->load($data['id'])->save($data);
 
 		return $this;
 	}
