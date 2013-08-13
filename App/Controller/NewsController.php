@@ -22,13 +22,13 @@ use Joomla\Log\Log;
 class NewsController extends DefaultController
 {
 	/**
-	 * Constructor.
+	 * The default view for the app
 	 *
-	 * @param   Input                $input  The input object.
-	 * @param   AbstractApplication  $app    The application object.
-	 *
-	 * @since   1.0
+	 * @var    string
+	 * @since  1.0
 	 */
+	protected $defaultView = 'news';
+
 	public function __construct(Input $input = null, AbstractApplication $app = null)
 	{
 		parent::__construct($input, $app);
