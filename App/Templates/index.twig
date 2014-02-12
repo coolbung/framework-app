@@ -16,7 +16,7 @@
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
                     <li class="{{ "" == uri.route or "dashboard" == firstPart ? "active" : "" }}"><a href="{{ uri.base.path }}">Home</a></li>
-                    <li><a href="http://joomla.github.io/joomla-framework/">Docs</a></li>
+                    <li><a target="_blank" href="http://docs.joomla.org/Framework">Docs</a></li>
                     <li class="{{ "news" == uri.route or "news" == firstPart ? "active" : "" }}"><a href="{{ uri.base.path }}news">News</a></li>
                     {% if user.id %}
                     <li><a href="{{ uri.base.path }}news/add">Add News</a></li>
