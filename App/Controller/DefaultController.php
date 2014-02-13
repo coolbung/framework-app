@@ -108,7 +108,10 @@ class DefaultController extends AbstractController
 
 		/* @type DefaultHtmlView $view */
 		$view = new $vClass(new $mClass, $paths);
-		$view->setLayout($vName . '.' . $lName);
+		if ('html' == $vFormat)
+		{
+			$view->setLayout($vName . '.' . $lName);
+		}
 
 		try
 		{

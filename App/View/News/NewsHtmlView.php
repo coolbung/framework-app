@@ -57,8 +57,7 @@ class NewsHtmlView extends DefaultHtmlView
 
 			default:
 				$items = $this->model->getItems();
-				echo json_encode($items);
-				//$this->renderer->set('items', $items);
+				$this->renderer->set('items', $items);
 
 				if (count($items) >= 1)
 				{
@@ -72,6 +71,6 @@ class NewsHtmlView extends DefaultHtmlView
 				break;
 		}
 
-		//return parent::render();
+		return parent::render();
 	}
 }
