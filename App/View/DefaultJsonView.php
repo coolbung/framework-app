@@ -4,24 +4,23 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace App\View\News;
+namespace App\View;
+
+use App\Authentication\GitHub\GitHubLoginHelper;
+use App\View\Renderer\TwigExtension;
 
 use Joomla\Factory;
-use Joomla\Language\Text;
 use Joomla\Model\ModelInterface;
 use Joomla\View\AbstractView;
-use Joomla\Input;
+use Joomla\View\Renderer\RendererInterface;
 
-
-use App\Model\NewsModel;
-#use App\View\DefaultHtmlView;
 
 /**
- * News HTML view class for the application
+ * Default JSON view class for the application
  *
  * @since  1.0
  */
-class NewsJsonView extends AbstractView
+class DefaultJsonView extends AbstractView
 {
 	/**
 	 * The model object.
