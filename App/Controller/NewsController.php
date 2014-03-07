@@ -25,6 +25,5 @@ class NewsController extends DefaultController
 	 * @since  1.0
 	 */
 	protected $defaultView = 'news';
-	
 
 }
