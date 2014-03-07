@@ -585,8 +585,8 @@ class DefaultDatabaseTable implements \IteratorAggregate
 		return $this->getIterator();
 	}
 	
-	public function getErrorMsg() {
-		echo __LINE__;
+	public function getErrorMsg() 
+	{
 		return $this->db->get('errorNum');
 	}
 }

@@ -7,11 +7,9 @@
 namespace App\View;
 
 use App\App;
-use App\View\Renderer\TwigExtension;
 
 use Joomla\Model\ModelInterface;
 use Joomla\View\AbstractView;
-use Joomla\View\Renderer\RendererInterface;
 
 /**
  * Default view class for the application
@@ -27,22 +25,6 @@ class DefaultJsonView extends AbstractView
 	 * @since  1.0
 	 */
 	protected $app;
-
-	/**
-	 * The view layout.
-	 *
-	 * @var    string
-	 * @since  1.0
-	 */
-	protected $layout = null;
-
-	/**
-	 * The view template engine.
-	 *
-	 * @var    RendererInterface
-	 * @since  1.0
-	 */
-	protected $renderer = null;
 
 	/**
 	 * Method to instantiate the view.
@@ -87,18 +69,6 @@ class DefaultJsonView extends AbstractView
 	{
 		// Escape the output.
 		return htmlspecialchars($output, ENT_COMPAT, 'UTF-8');
-	}
-
-	/**
-	 * Method to get the renderer object.
-	 *
-	 * @return  RendererInterface  The renderer object.
-	 *
-	 * @since   1.0
-	 */
-	public function getRenderer()
-	{
-		return $this->renderer;
 	}
 
 	/**

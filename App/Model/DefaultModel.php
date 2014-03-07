@@ -39,8 +39,8 @@ class DefaultModel extends AbstractDatabaseModel
 	{
 		parent::__construct($db);
 
-		$this->input 	= $input;
-		$this->db 		= $db;
+		$this->input	= $input;
+		$this->db		= $db;
 	}
 	
 	public function save() {

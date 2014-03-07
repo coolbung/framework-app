@@ -69,8 +69,8 @@ final class App extends AbstractWebApplication implements ContainerAwareInterfac
 		define('BASE_URL', $this->get('uri.base.full'));
 		define('DEFAULT_THEME', BASE_URL . 'themes/' . $this->theme);
 		
-		error_reporting(E_ALL);
-		ini_set('display_errors', 1);
+		error_reporting(constant($this->config->get('system.errorlevel', 0)));
+		ini_set('display_errors', $this->config->get('system.errordisplay', false));
 		
 		// Check if this is a REST API request
 		$parts = explode('/', $this->get('uri.route'));
@@ -96,7 +96,7 @@ final class App extends AbstractWebApplication implements ContainerAwareInterfac
 			// Instantiate the router
 			$router = new AppRouter($this->input, $this);
 			$maps = json_decode(file_get_contents(JPATH_CONFIGURATION . '/routes.json'));
-			
+
 			if (!$maps)
 			{
 				throw new \RuntimeException('Invalid router file.', 500);
