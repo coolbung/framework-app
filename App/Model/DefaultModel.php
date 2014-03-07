@@ -7,7 +7,6 @@
 
 namespace App\Model;
 
-use Joomla\Factory;
 use Joomla\Input\Input;
 use Joomla\Model\AbstractDatabaseModel;
 use Joomla\Database\DatabaseDriver;
@@ -40,6 +39,21 @@ class DefaultModel extends AbstractDatabaseModel
 	{
 		parent::__construct($db);
 
-		$this->input = $input;
+		$this->input 	= $input;
+		$this->db 		= $db;
 	}
+	
+	public function save() {
+		$ignore_fields = array ('_rawRoute','task');
+		$table = new \App\Table\NewsTable($this->db);
+		$table->save($this->input->getArray(), $ignore_fields);
+		var_dump($table->geterrorMsg()); die;
+		return $this->db->get('errorNum');
+	}	
+
+	public function load($keys = null, $reset = true) {
+		$table = new \App\Table\NewsTable($this->db);
+		$table->load($keys);
+		
+	}	
 }

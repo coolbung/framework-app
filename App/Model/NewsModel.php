@@ -6,7 +6,6 @@
 
 namespace App\Model;
 
-use Joomla\Factory;
 use Joomla\Filter\InputFilter;
 use Joomla\Registry\Registry;
 use Joomla\String\String;
@@ -69,4 +68,13 @@ class NewsModel extends DefaultModel
 
 		return $this->db->setQuery($query)->loadObjectList();
 	}
+
+	public function getTotal()
+	{
+		$query = $this->db->getQuery(true)
+			->select('COUNT(-1)')
+			->from($this->db->quoteName('#__news','a'));
+
+		return $this->db->setQuery($query)->loadResult();
+	}	
 }
