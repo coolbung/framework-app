@@ -19,6 +19,8 @@ use App\Model\DefaultModel;
  */
 class NewsModel extends DefaultModel
 {
+
+	public $model = 'news';
 	/**
 	 * Retrieve a single news item
 	 *
@@ -69,6 +71,13 @@ class NewsModel extends DefaultModel
 		return $this->db->setQuery($query)->loadObjectList();
 	}
 
+	/**
+	 * Get total records
+	 *
+	 * @return  int  Record count
+	 *
+	 * @since   1.0
+	 */
 	public function getTotal()
 	{
 		$query = $this->db->getQuery(true)
@@ -77,4 +86,5 @@ class NewsModel extends DefaultModel
 
 		return $this->db->setQuery($query)->loadResult();
 	}	
+
 }

@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * @copyright  Copyright (C) 2012 - 2013 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -12,12 +11,28 @@ use Joomla\Model\AbstractDatabaseModel;
 use Joomla\Database\DatabaseDriver;
 
 /**
- * Default model for the tracker application.
+ * Default model for the application.
  *
  * @since  1.0
  */
 class DefaultModel extends AbstractDatabaseModel
 {
+	/**
+	 * Model name
+	 *
+	 * @var    Container
+	 * @since  1.0
+	 */
+	public $model = 'default';
+
+	/**
+	 * Table object
+	 *
+	 * @var    Container
+	 * @since  1.0
+	 */
+	public $table;
+
 	/**
 	 * Input object
 	 *
@@ -41,18 +56,24 @@ class DefaultModel extends AbstractDatabaseModel
 
 		$this->input	= $input;
 		$this->db		= $db;
+		$this->table	= '\\App\Table\\' . ucfirst($this->model) . 'Table';
 	}
 	
 	public function save() {
 		$ignore_fields = array ('_rawRoute','task');
-		$table = new \App\Table\NewsTable($this->db);
+		if (!class_exists($this->table)) {
+			return $this;
+		}
+		$table = new $this->table($this->db);
 		$table->save($this->input->getArray(), $ignore_fields);
-		var_dump($table->geterrorMsg()); die;
-		return $this->db->get('errorNum');
+		return $this;
 	}	
 
 	public function load($keys = null, $reset = true) {
-		$table = new \App\Table\NewsTable($this->db);
+		if (!class_exists($this->table)) {
+			return $this;
+		}
+		$table = new $this->table($this->db);
 		$table->load($keys);
 		
 	}	

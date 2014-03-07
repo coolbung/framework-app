@@ -51,7 +51,7 @@ class DefaultController extends AbstractController implements ContainerAwareInte
 		// Get the input
 		$input = $this->getInput();
 
-		$task = $input->get('task','view');
+		$task = $input->get('task', 'view');
 
 		// Get some data from the request
 		$vName   = $input->getWord('view', $this->defaultView);
@@ -80,7 +80,7 @@ class DefaultController extends AbstractController implements ContainerAwareInte
 
 		$base = '\\App';
 
-		$defaultvClass = '\\App\\View\\Default' . ucfirst($vFormat) . 'View';
+		$defaultvClass = $base . '\\View\\Default' . ucfirst($vFormat) . 'View';
 		$vClass = $base . '\\View\\' . ucfirst($vName) . '\\' . ucfirst($vName) . ucfirst($vFormat) . 'View';
 		$mClass = $this->getModelName();
 
@@ -105,10 +105,11 @@ class DefaultController extends AbstractController implements ContainerAwareInte
 		}
 
 		$view = new $vClass($this->getApplication(), new $mClass($this->getInput(), $this->getContainer()->get('db')), $paths);
-		
+
 		if ($vFormat != 'html') {
 			return $view->render();
 		}
+
 		$view->setLayout($vName . '.' . $lName);
 
 		try
