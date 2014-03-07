@@ -134,7 +134,7 @@ class DefaultController extends AbstractController implements ContainerAwareInte
 	{
 		$mClass = $this->getModelName();
 		$model = new $mClass($this->getInput(), $this->getContainer()->get('db'));
-		if (!$model->save()) {
+		if (!$model->save($this->getInput()->getArray())) {
 			$this->getApplication()->enqueueMessage('Could not save', 'error');
 			$this->getApplication()->redirect($this->getApplication()->get('uri.base.path') . 'news/add');
 		}

@@ -7,12 +7,11 @@
 namespace App\View;
 
 use App\App;
-
 use Joomla\Model\ModelInterface;
 use Joomla\View\AbstractView;
 
 /**
- * Default view class for the application
+ * Default JSON view class for the application
  *
  * @since  1.0
  */
@@ -93,7 +92,7 @@ class DefaultJsonView extends AbstractView
 
 			default:
 				$total = $this->model->getTotal();
-				$op = $this->model->getItems();
+				$op['data'] = $this->model->getItems();
 				$op['total']= $total;
 				break;
 		}
