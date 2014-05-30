@@ -1,14 +1,13 @@
 {
-    "name": "com.websparkinc.framework-app",
-    "description": "Sample Framework App.",
-    "keywords": ["framework-app","joomla-framework"],
+    "name": "com.techjoomla.lcms.framework-app",
+    "description": "Sample App for LCMS Base",
+    "keywords": ["framework-app","joomla-framework","CRUD Sample","Webservices"],
     "homepage": "#",
     "license": "GPL-2.0+",
 	"version": "1.0.0-alpha",
     "require": {
         "php": ">=5.3.10",
         "joomla/framework": "1.0.*@stable",
-        "symfony/http-foundation": "2.4.*@stable",
         "twig/twig" : "1.*@stable",
         "twbs/bootstrap":"2.3.2"
     },
